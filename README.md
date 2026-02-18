@@ -121,6 +121,47 @@ Garantizar disponibilidad continua.
 La propuesta no redefine la arquitectura oficial, sino que la respeta y extiende hacia un entorno Linux robusto, estable y apto para producción empresarial.
 
 🧠 Mapa Conceptual
+```mermaid
+flowchart TD
+
+    A[Implementación Power Server en Linux] 
+
+    A --> B[Base Tecnológica]
+    B --> B1[PowerBuilder 2025]
+    B --> B2[Power Server 2025]
+    B --> B3[Engine]
+    B --> B4[Ubuntu 22.04]
+    B --> B5[PostgreSQL]
+
+    A --> C[Arquitectura]
+    C --> C1[Power Client]
+    C1 --> C2[Conexión HTTPS]
+    C2 --> C3[Engine - Reverse Proxy]
+    C3 --> C4[Power Server - HTTP Interno]
+    C4 --> C5[Base de Datos PostgreSQL]
+
+    A --> D[Seguridad]
+    D --> D1[Certificados SSL]
+    D --> D2[Restricción de IPs]
+    D --> D3[Cabeceras HTTP Seguras]
+    D --> D4[Servicios con Auto-Reinicio]
+
+    A --> E[Despliegue]
+    E --> E1[Compilación en PowerBuilder]
+    E --> E2[Generación Folder]
+    E --> E3[Compresión]
+    E --> E4[Transferencia SSH / WinSCP]
+    E --> E5[Descompresión en Ubuntu]
+    E --> E6[Reinicio Servicio]
+
+    A --> F[Beneficios]
+    F --> F1[Escalabilidad]
+    F --> F2[Centralización]
+    F --> F3[Múltiples Proyectos]
+    F --> F4[Alta Disponibilidad 24/7]
+    F --> F5[Mantenibilidad]
+
+
 IMPLEMENTACIÓN POWER SERVER EN LINUX
 │
 ├── Base Tecnológica
