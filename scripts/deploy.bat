@@ -1,0 +1,3 @@
+@echo off
+echo Deploying project...
+REM Compress, transfer and restart service
