@@ -168,5 +168,22 @@ IMPLEMENTACIÓN POWER SERVER EN LINUX
     ├── Alta disponibilidad 24/7
     └── Mantenibilidad simplificada
 
+Aquí tienes el contenido organizado en formato Markdown, optimizado para que se vea profesional en un archivo README.md de GitHub. He incluido una sección de arquitectura con Mermaid, que GitHub renderiza automáticamente como un diagrama.Implementación de Power Server y Power Client sobre Ubuntu con NginxEste repositorio contiene el resumen ejecutivo y la estructura técnica de la implementación de soluciones PowerBuilder en entornos Linux, basada en la presentación de la Ing. Alda Marilla González (Jirama Soft).📝 Resumen AcadémicoLa transición de aplicaciones tradicionales de escritorio hacia la web mediante Power Server y Power Client permite modernizar sistemas legados sin perder la robustez de PowerBuilder. El uso de Ubuntu Server 22.04 como sistema operativo base, junto con Nginx como servidor web y proxy inverso, ofrece una infraestructura estable, segura y altamente escalable.Puntos Clave:Desvinculación de IIS: Se rompe la dependencia de Windows Server para el despliegue de APIs.Seguridad Avanzada: Nginx actúa como escudo (terminación SSL, filtrado de IPs y cabeceras de seguridad), manteniendo a Power Server aislado de ataques directos.Alta Disponibilidad: Configuración de servicios en Linux con reinicio automático (Daemon) para asegurar operatividad 24/7.Automatización: Uso de scripts .bat (Windows) y .sh (Linux) para comprimir, transferir y desplegar cambios en segundos.🏗️ Arquitectura TécnicaComponenteTecnologíaFunciónSO ServidorUbuntu 22.04Host principal de los servicios.Proxy InversoNginx (Engine)Gestión de HTTPS, certificados y ruteo por puertos.App ServerPower Server (Web API)Ejecución de la lógica de negocio sobre .NET Core.Base de DatosPostgreSQLAlmacenamiento de datos persistentes.ClientePower ClientAplicación instalable que se comunica vía HTTPS.🗺️ Mapa Conceptual (Mermaid)GitHub renderizará el siguiente código como un diagrama de flujo:Fragmento de códigograph TD
+    User((Usuario / Power Client)) -- HTTPS/SSL --> Nginx{Nginx Proxy Inverso}
+    
+    subgraph Servidor Ubuntu 22.04
+        Nginx -- Port Mapping --> PS1[Power Server API - Proyecto A]
+        Nginx -- Port Mapping --> PS2[Power Server API - Proyecto B]
+        PS1 --> DB[(PostgreSQL)]
+        PS2 --> DB
+    end
+
+    subgraph Flujo de Despliegue
+        PB[PowerBuilder 2025] --> Comp[Compilación Local]
+        Comp --> Bat[Script .BAT / WinSCP]
+        Bat --> Unzip[Script .SH / Despliegue]
+    end
+🚀 Flujo de Despliegue AutomatizadoEl proceso de actualización se resume en tres etapas críticas:Compilación en PowerBuilder 2025: Se genera el target para Linux 64-bit (Power Server) y los archivos de instalación (Power Client).Transferencia Segura: Un script local comprime los binarios y los envía al servidor mediante SCP o WinSCP.Actualización en Caliente: Un script en el servidor descomprime los archivos en el directorio /var/www/ y reinicia los servicios del sistema para aplicar cambios sin intervención manual extensa.Nota: "Engine" (Nginx) es el encargado de decidir qué Power Server responde a cada URL recibida, permitiendo manejar múltiples sistemas en un solo servidor Linux.🛠️ Requisitos de ImplementaciónLicencia activa de Apeon PowerBuilder (Cloud Edition).Servidor con Ubuntu 22.04 LTS.SDK de .NET Runtime instalado en el servidor.Configuración de systemd para la gestión de procesos de la API.
+
 
 
